@@ -11,6 +11,7 @@ COPY ./src/product-catalog/go.sum go.sum
 
 ENV GOPROXY=direct
 ENV GOSUMDB=off
+
 RUN go mod download
 
 COPY ./src/product-catalog/genproto/oteldemo/ genproto/oteldemo/

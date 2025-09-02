@@ -56,11 +56,10 @@ dependencies {
                 "dev.openfeature.contrib.providers:flagd:0.11.14",
                 'dev.openfeature:sdk:1.17.0'
 
-        implementation files('../../agent-all.jar')
-
         runtimeOnly "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
                 "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
-                "io.netty:netty-tcnative-boringssl-static:2.0.72.Final"
+                "io.netty:netty-tcnative-boringssl-static:2.0.72.Final",
+                "org.apache.logging.log4j:log4j-jul:2.25.1"
     }
 }
 

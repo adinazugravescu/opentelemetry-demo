@@ -35,7 +35,7 @@
         "on": true,
         "off": false
       },
-      "defaultVariant": "off"
+      "defaultVariant": "on"
     },
     "adFailure": {
       "description": "Fail ad service",

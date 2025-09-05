@@ -73,11 +73,11 @@ services:
       - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
       - OTEL_RESOURCE_ATTRIBUTES
       - OTEL_LOGS_EXPORTER=otlp
-      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://localhost:4317
+      - PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+      - OTEL_COLLECTOR_HOST
       - OTEL_TRACES_EXPORTER=otlp
       - OTEL_SERVICE_NAME=ad
       # Workaround on OSX for https://bugs.openjdk.org/browse/JDK-8345296
-      - _JAVA_OPTIONS=
     depends_on:
       otel-collector:
         condition: service_started
@@ -882,9 +882,12 @@ services:
     image: grafana/tempo:2.3.0
     container_name: tempo
     command:
-    - server.http_listen_port=3200
-    - server.grpc_listen_port=9096
-    - distributor.receivers.otlp.protocols.grpc.endpoint=0.0.0.0:4317
-    - distributor.receivers.otlp.protocols.http.endpoint=0.0.0.0:4318
+      - "-config.file=/etc/tempo.yaml"
+    volumes:
+      - ./tempo.yaml:/etc/tempo.yaml
+    ports:
+      - "3200:3200"
+      - "4317:4317"
+      - "4318:4318"
     logging: *logging
     restart: unless-stopped

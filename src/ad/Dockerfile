@@ -34,7 +34,7 @@ RUN yum update -y && yum install -y findutils
 COPY --from=builder /usr/src/app/ ./
 COPY ../../agent-all.jar /usr/agent-all.jar
 ADD --chmod=644 https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v$OTEL_JAVA_AGENT_VERSION/opentelemetry-javaagent.jar /usr/src/app/opentelemetry-javaagent.jar
-ENV JAVA_TOOL_OPTIONS="-javaagent:/usr/src/app/opentelemetry-javaagent.jar -Dotel.javaagent.extensions=/usr/agent-all.jar -Dtools.profiler.exporter.args='profilerOptions=start,otlp,loop=6s,interval=1ms;interval=4s;endpoint=pyroscope:4040;secure=false' -Dio.netty.tryReflectionSetAccessible=false -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager"
+ENV JAVA_TOOL_OPTIONS="-javaagent:/usr/src/app/opentelemetry-javaagent.jar -Dotel.javaagent.extensions=/usr/agent-all.jar -Dtools.profiler.exporter.args='profilerOptions=start,loop=6s,interval=1ns;endpoint=pyroscope:4040;secure=false' -Dio.netty.tryReflectionSetAccessible=false -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager"
 
 # RUN apt update -y && apt install -y gdb
 

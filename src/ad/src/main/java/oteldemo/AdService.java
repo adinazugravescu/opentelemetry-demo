@@ -149,6 +149,7 @@ public final class AdService {
     @Override
     public void getAds(AdRequest req, StreamObserver<AdResponse> responseObserver) {
       logger.log(Level.WARN, "called");
+
       AdService service = AdService.getInstance();
 
       // get the current span in context
